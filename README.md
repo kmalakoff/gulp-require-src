@@ -1,4 +1,4 @@
-gulp-module-system
+gulp-require-src
 ==================
 
 Gulp plugin to create a file stream of required sources

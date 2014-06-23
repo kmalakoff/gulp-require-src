@@ -1,6 +1,6 @@
 {
   "name": "gulp-require-src",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gulp plugin to create a file stream of required sources",
   "keywords": ["gulpplugin", "module", "system", "local", "local-shim", "brunch"],
   "main": "index.coffee",

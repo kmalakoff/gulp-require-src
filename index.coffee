@@ -18,11 +18,10 @@ createFile = (module_name, options) ->
   file_path = require.resolve(module_name)
   file = {cwd: __dirname, contents: new Buffer(fs.readFileSync(file_path, 'utf8'))}
   file.path = file_path.replace(__dirname, '')
-  file.base = file.path.replace(path.basename(file.path), '')
+  file.base = path.dirname(file.path)
 
-  package_info = require(path.resolve(packagePath(file_path)))
-  file_name = "#{package_info.name}#{if options.version then '-'+package_info.version else ''}#{path.extname(file.path)}"
-  file.path = path.join(file.path.replace(path.basename(file.path), ''), file_name)
+  pkg = require(packagePath(file_path))
+  file.path = file.path.replace(path.basename(file.path), "#{pkg.name}#{if options.version then '-'+pkg.version else ''}#{path.extname(file.path)}")
   return new File(file)
 
 module.exports = (module_names, options={}) -> es.readArray(createFile(module_name, options) for module_name in module_names)

@@ -14,7 +14,7 @@ packagePath = (file_path) ->
   paths.push("#{paths.pop().split('/').slice(0,2).join('/')}/package.json")
   return paths.join('node_modules')
 
-createFile = (module_name) ->
+createFile = (module_name, options) ->
   file_path = require.resolve(module_name)
   file = {cwd: __dirname, contents: new Buffer(fs.readFileSync(file_path, 'utf8'))}
   file.path = file_path.replace(__dirname, '')
@@ -25,4 +25,4 @@ createFile = (module_name) ->
   file.path = path.join(file.path.replace(path.basename(file.path), ''), file_name)
   return new File(file)
 
-module.exports = (module_names, options={}) -> es.readArray(createFile(module_name) for module_name in module_names)
+module.exports = (module_names, options={}) -> es.readArray(createFile(module_name, options) for module_name in module_names)
